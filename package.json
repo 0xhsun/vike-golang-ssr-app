@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "dev": "tsx ./express-entry.ts",
+    "dev": "node ./express-entry.js",
     "build": "vike build",
-    "preview": "cross-env NODE_ENV=production tsx ./express-entry.ts",
+    "preview": "cross-env NODE_ENV=production node ./express-entry.js",
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate"
   },

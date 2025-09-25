@@ -2,9 +2,9 @@ import "./style.css";
 
 import "./tailwind.css";
 import logoUrl from "../assets/logo.svg";
-import { Link } from "../components/Link.js";
+import { Link } from "../components/Link.jsx";
 
-export default function LayoutDefault({ children }: { children: React.ReactNode }) {
+export default function LayoutDefault({ children }) {
   return (
     <div className={"flex max-w-5xl m-auto"}>
       <Sidebar>
@@ -18,7 +18,7 @@ export default function LayoutDefault({ children }: { children: React.ReactNode 
   );
 }
 
-function Sidebar({ children }: { children: React.ReactNode }) {
+function Sidebar({ children }) {
   return (
     <div id="sidebar" className={"p-5 flex flex-col shrink-0 border-r-2 border-r-gray-200"}>
       {children}
@@ -26,7 +26,7 @@ function Sidebar({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Content({ children }: { children: React.ReactNode }) {
+function Content({ children }) {
   return (
     <div id="page-container">
       <div id="page-content" className={"p-5 pb-12 min-h-screen"}>

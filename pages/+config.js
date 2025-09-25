@@ -1,6 +1,6 @@
-import type { Config } from "vike/types";
 import vikeReact from "vike-react/config";
-import Layout from "../layouts/LayoutDefault.js";
+import Layout from "../layouts/LayoutDefault.jsx";
+import { ssr } from "vike/plugin";
 
 // Default config (can be overridden by pages)
 // https://vike.dev/config
@@ -8,10 +8,9 @@ import Layout from "../layouts/LayoutDefault.js";
 export default {
   // https://vike.dev/Layout
   Layout,
-
   // https://vike.dev/head-tags
   title: "My Vike App",
   description: "Demo showcasing Vike",
-
+  prerender: true,
   extends: vikeReact,
-} satisfies Config;
+};

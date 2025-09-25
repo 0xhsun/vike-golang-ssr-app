@@ -1,5 +1,5 @@
 import { useData } from "vike-react/useData";
-import type { Data } from "./+data.js";
+import type { Data } from "./+data.jsx";
 
 export default function Page() {
   const movie = useData<Data>();

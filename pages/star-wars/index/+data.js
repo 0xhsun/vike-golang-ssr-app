@@ -1,16 +1,16 @@
 // https://vike.dev/data
 
 import { useConfig } from "vike-react/useConfig";
-import type { Movie, MovieDetails } from "../types.js";
+// import type { Movie, MovieDetails } from "../types.js";
 
-export type Data = Awaited<ReturnType<typeof data>>;
+// export type Data = Awaited<ReturnType<typeof data>>;
 
 export const data = async () => {
   // https://vike.dev/useConfig
   const config = useConfig();
 
   const response = await fetch("https://brillout.github.io/star-wars/api/films.json");
-  const moviesData = (await response.json()) as MovieDetails[];
+  const moviesData = (await response.json()) ;
 
   config({
     // Set <title>
@@ -24,7 +24,7 @@ export const data = async () => {
   return movies;
 };
 
-function minimize(movies: MovieDetails[]): Movie[] {
+function minimize(movies) {
   return movies.map((movie) => {
     const { title, release_date, id } = movie;
     return { title, release_date, id };

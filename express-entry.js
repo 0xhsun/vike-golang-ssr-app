@@ -1,7 +1,7 @@
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createTodoHandler } from "./server/create-todo-handler";
-import { vikeHandler } from "./server/vike-handler";
+import { apiProxyHandler } from "./server/api-proxy-handler.js";
+import { vikeHandler } from "./server/vike-handler.js";
 import { createHandler } from "@universal-middleware/express";
 import express from "express";
 import { createDevMiddleware } from "vike";
@@ -12,7 +12,7 @@ const root = __dirname;
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 const hmrPort = process.env.HMR_PORT ? parseInt(process.env.HMR_PORT, 10) : 24678;
 
-export default (await startServer()) as unknown;
+export default (await startServer());
 
 async function startServer() {
   const app = express();
@@ -34,7 +34,14 @@ async function startServer() {
     app.use(viteDevMiddleware);
   }
 
-  app.post("/api/todo/create", createHandler(createTodoHandler)());
+  // Legacy route compatibility (optional - can remove later)
+  app.post("/api/todo/create", (req, res, next) => {
+    req.url = "/api/todos"; // Redirect to correct Go route
+    next();
+  });
+
+  // Universal BFF API proxy - forwards ALL /api/* requests to Go backend
+  app.all(/^\/api\/.*/, createHandler(apiProxyHandler)());
 
   /**
    * Vike route
